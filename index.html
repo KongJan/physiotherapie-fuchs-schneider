@@ -193,7 +193,6 @@
 
   $(document).ready(function () {
 
-
     // Reveal song feature
     window.logoCounter = 0;
     $("#click-logo").on("click", function () {
@@ -206,22 +205,17 @@
     // Cookie Banner
     if (localStorage.getItem("cookiesAccepted") !== "true") {
 
-
-      // Wenn der Nutzer auf "Zustimmen" klickt
+      // on click "submit"
       $("#accept-cookies").click(function () {
 
-
-        // Speichern der Zustimmung in localStorage
-        // TODO add after testing
-        // localStorage.setItem("cookiesAccepted", "true");
+        // Store consent in localStorage
+        localStorage.setItem("cookiesAccepted", "true");
 
         // Google Maps laden
         loadGoogleMaps();
       });
     } else {
-
-
-      // Google Maps sofort laden, wenn bereits zugestimmt wurde
+      // Load Google Maps immediately, if already accepted
       loadGoogleMaps();
     }
   });
