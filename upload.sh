@@ -7,6 +7,7 @@
 # AWS_SECRET_ACCESS_KEY="xxxxx"
 # AWS_DEFAULT_REGION="xxxxx"
 # BUCKET_NAME="xxxxx"
+# DISTRIBUTION_ID="xxxxx"
 
 # Export AWS credentials as environment variables
 export AWS_ACCESS_KEY_ID
@@ -35,13 +36,20 @@ do
   DESTINATION_PATH="s3://$BUCKET_NAME/$(basename "$FILE_PATH")"
 
   # Upload file to S3
-  echo "Uploading $FILE_PATH to $DESTINATION_PATH..."
   aws s3 cp "$FILE_PATH" "$DESTINATION_PATH"
 
   if [ $? -eq 0 ]; then
-      echo "File uploaded successfully."
+      printf "File uploaded successfully.\n\n"
   else
-      echo "Failed to upload file."
+      printf "Failed to upload file.\n\n"
       exit 1
   fi
 done
+
+printf "Upload completed.\n\n"
+
+aws cloudfront create-invalidation \
+  --distribution-id $DISTRIBUTION_ID \
+  --paths "/*"
+
+printf "Invalidation completed.\n\n"
