@@ -50,6 +50,7 @@ printf "Upload completed.\n\n"
 
 aws cloudfront create-invalidation \
   --distribution-id $DISTRIBUTION_ID \
-  --paths "/*"
+  --paths "/*" \
+  --output text
 
-printf "Invalidation completed.\n\n"
+printf "\nInvalidation initiated.\n\n"
