@@ -3,16 +3,9 @@
 # execute script with: BASH_ENV=./.env.local ./upload.sh
 
 # Content of .env.local must be:
-# AWS_ACCESS_KEY_ID="xxxxx"
-# AWS_SECRET_ACCESS_KEY="xxxxx"
-# AWS_DEFAULT_REGION="xxxxx"
+# PROFILE_NAME="xxxxx"
 # BUCKET_NAME="xxxxx"
 # DISTRIBUTION_ID="xxxxx"
-
-# Export AWS credentials as environment variables
-export AWS_ACCESS_KEY_ID
-export AWS_SECRET_ACCESS_KEY
-export AWS_DEFAULT_REGION
 
 # Check if AWS CLI is installed
 if ! command -v aws &> /dev/null
@@ -36,7 +29,7 @@ do
   DESTINATION_PATH="s3://$BUCKET_NAME/$(basename "$FILE_PATH")"
 
   # Upload file to S3
-  aws s3 cp "$FILE_PATH" "$DESTINATION_PATH"
+  aws s3 cp "$FILE_PATH" "$DESTINATION_PATH" --profile $PROFILE_NAME
 
   if [ $? -eq 0 ]; then
       printf "File uploaded successfully.\n\n"
@@ -51,6 +44,7 @@ printf "Upload completed.\n\n"
 aws cloudfront create-invalidation \
   --distribution-id $DISTRIBUTION_ID \
   --paths "/*" \
-  --output text
+  --output text \
+  --profile $PROFILE_NAME
 
 printf "\nInvalidation initiated.\n\n"
