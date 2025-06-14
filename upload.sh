@@ -19,6 +19,7 @@ FILES_TO_UPLOAD=(
     "./index.html"
     "./logo.png"
     "./favicon.ico"
+    "./robots.txt"
     # Add more files as needed
 )
 

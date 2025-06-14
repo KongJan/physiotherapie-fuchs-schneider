@@ -1,0 +1,4 @@
+# robots.txt für Physiotherapie Fuchs-Schneider
+
+User-agent: *
+Disallow:
