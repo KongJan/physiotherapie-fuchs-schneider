@@ -153,21 +153,17 @@
     </div>
 
 </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-        crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
-        crossorigin="anonymous"></script>
-<script>
-  $(document).ready(function () {
 
-    // Reveal song feature
-    window.logoCounter = 0;
-    $("#click-logo").on("click", function () {
-      window.logoCounter++;
-      if (window.logoCounter > 3) {
-        $("#song").removeClass("d-none")
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let logoCounter = 0;
+    const clickLogo = document.getElementById("click-logo");
+    const song = document.getElementById("song");
+
+    clickLogo.addEventListener("click", () => {
+      logoCounter++;
+      if (logoCounter > 3) {
+        song.classList.remove("d-none");
       }
     });
   });
